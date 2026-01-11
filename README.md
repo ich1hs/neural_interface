@@ -35,4 +35,4 @@ Open [http://localhost:3000](http://localhost:3000) to view the interface.
 Deployed on **Vercel**.
 
 ---
-*Built by [Your Name]*
+*Built by [ich1hs](https://github.com/ich1hs)*

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   description:
     "Interfacing with the neural processes of an AI/ML architect. Fullstack systems, machine learning, and data science.",
   keywords: ["AI", "Machine Learning", "Fullstack", "Data Science", "Portfolio"],
-  authors: [{ name: "Neural Architect" }],
+  authors: [{ name: "ich1hs", url: "https://github.com/ich1hs" }],
   openGraph: {
     title: "NEURAL_INTERFACE | AI/ML Architect",
     description: "Interfacing with the neural processes of an AI/ML architect.",

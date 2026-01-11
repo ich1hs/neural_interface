@@ -9,7 +9,7 @@ import { ArrowUpRight } from "lucide-react";
 
 const PRODUCT_LINKS = [
     { name: "DOCS", href: "#" },
-    { name: "GITHUB", href: "https://github.com" },
+    { name: "GITHUB", href: "https://github.com/ich1hs" },
     { name: "TWITTER", href: "https://twitter.com" },
 ];
 
@@ -250,7 +250,7 @@ export function ContactSection() {
                     <span>FRAMER</span>
                 </div>
                 <div className="text-mono text-xs text-muted/40 mt-4">
-                    © 2026 NEURAL_INTERFACE
+                    © 2026 NEURAL_INTERFACE • [ BY ICH1HS ]
                 </div>
             </motion.div>
         </section>
