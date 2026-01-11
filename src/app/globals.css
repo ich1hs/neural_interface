@@ -1,26 +1,314 @@
 @import "tailwindcss";
 
+/* ============================================
+   NEURAL_INTERFACE_2026 — Design System
+   ============================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Core Palette */
+  --void-black: #050505;
+  --neural-gray: #0A0A0A;
+  --synapse-white: #E8E8E8;
+  --signal-green: #00FF94;
+  --aether-blue: #4D7CFF;
+  --warning-amber: #FFB800;
+
+  /* Semantic */
+  --background: var(--void-black);
+  --foreground: var(--synapse-white);
+  --muted: #888888;
+  --border: #1a1a1a;
+
+  /* Typography */
+  --font-display: var(--font-outfit);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-void-black: #050505;
+  --color-neural-gray: #0A0A0A;
+  --color-synapse-white: #E8E8E8;
+  --color-signal-green: #00FF94;
+  --color-aether-blue: #4D7CFF;
+  --color-warning-amber: #FFB800;
+  --color-muted: #888888;
+  --color-border: #1a1a1a;
+  --font-sans: var(--font-outfit);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================
+   Base Styles
+   ============================================ */
+
+* {
+  cursor: none;
+  /* Custom cursor */
+  user-select: none;
+  /* Prevent text selection on drag */
+  -webkit-user-drag: none;
+  /* Prevent element dragging */
+}
+
+html {
+  scroll-behavior: auto;
+  /* Let Lenis handle smooth scroll */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--void-black);
+  color: var(--synapse-white);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Restore cursor for interactive elements */
+a,
+button,
+[role="button"],
+input,
+textarea,
+select {
+  cursor: none;
+}
+
+/* ============================================
+   Typography Utilities
+   ============================================ */
+
+.text-display {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+}
+
+.text-mono {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.text-label {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+}
+
+/* ============================================
+   Bracket UI System (from Aptos)
+   ============================================ */
+
+.bracket-text::before {
+  content: "[ ";
+  opacity: 0.5;
+}
+
+.bracket-text::after {
+  content: " ]";
+  opacity: 0.5;
+}
+
+.bracket-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--synapse-white);
+  transition: color 0.2s ease;
+}
+
+.bracket-link::before {
+  content: "[";
+  opacity: 0.4;
+  transition: opacity 0.2s ease;
+}
+
+.bracket-link::after {
+  content: "]";
+  opacity: 0.4;
+  transition: opacity 0.2s ease;
+}
+
+.bracket-link:hover {
+  color: var(--signal-green);
+}
+
+.bracket-link:hover::before,
+.bracket-link:hover::after {
+  opacity: 1;
+  color: var(--signal-green);
+}
+
+/* ============================================
+   Status Indicators
+   ============================================ */
+
+.status-online::before {
+  content: "●";
+  margin-right: 0.5rem;
+  color: var(--signal-green);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.status-standby::before {
+  content: "◌";
+  margin-right: 0.5rem;
+  color: var(--muted);
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* ============================================
+   Grid Background (from Aptos)
+   ============================================ */
+
+.grid-bg {
+  background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ============================================
+   Grain Overlay (from Aether1)
+   ============================================ */
+
+.grain-overlay::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  z-index: 9999;
+}
+
+/* ============================================
+   Custom Cursor
+   ============================================ */
+
+.cursor {
+  position: fixed;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--signal-green);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, border-color 0.2s;
+  mix-blend-mode: difference;
+}
+
+.cursor.hover {
+  width: 48px;
+  height: 48px;
+  border-color: var(--synapse-white);
+}
+
+/* ============================================
+   Selection
+   ============================================ */
+
+::selection {
+  background: var(--signal-green);
+  color: var(--void-black);
+}
+
+/* ============================================
+   Scrollbar
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--void-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* ============================================
+   Animation Utilities
+   ============================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scramble {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Stagger delay utilities */
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
 }
